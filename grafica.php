@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <title>CONTAINER ALL RISK</title>
-    <meta charset="utf-8">
+    
     <link rel="shortcut icon" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -22,7 +22,7 @@
     <link href="css/animate.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <meta http-equiv="Content-Type" content="text/html; charset=gb18030">
+    
     <link href="css/style.css" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" type="text/css" href="librerias/bootstrap/css/bootstrap.css">
@@ -73,7 +73,6 @@
                     <?php
                     if($_COOKIE["lvl"]==1){
                     ?>
-
                     <li><a href="reportes.php">Reporte general</a></li>
                     <li><a href="reportes-detallado.php">Reporte detallado</a></li>
                     <?php
@@ -112,7 +111,8 @@
             ?>
             <li class="nav-submenu"><a href="#">Mercancias</a>
                 <ul>
-                    <li><a href="mercancias.php">Ver viaje</a></li>
+                    <li><a href="mercancias.php">Ver embarque</a></li>
+                    <li><a href="nuevo-certificado.php">Nuevo embarque</a></li>
                     <li><a href="grafica.php">Reporte</a></li>
                 </ul>
             </li>

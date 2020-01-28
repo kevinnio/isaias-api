@@ -7,9 +7,9 @@
 <!DOCTYPE html>
 <html lang="en" class="nav-no-js">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html" ; charset="utf-8" />
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <title>CONTAINER ALL RISK</title>
@@ -105,7 +105,8 @@
             ?>
             <li class="nav-submenu"><a href="#">Mercancias</a>
                 <ul>
-                    <li><a href="mercancias.php">Ver viaje</a></li>
+                    <li><a href="mercancias.php">Ver embarque</a></li>
+                    <li><a href="nuevo-certificado.php">Nuevo embarque</a></li>
                     <li><a href="grafica.php">Reporte</a></li>
                 </ul>
             </li>
@@ -153,7 +154,7 @@ if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Razon Social</label>
                                     <div class="col-sm-4">
-                                        <input type="text" name="razonsocial" class="form-control" value="<?php echo $row["RazonSocial"] ?>">
+                                        <input type="text" name="razonsocial"  class="form-control" value="<?php echo $row["RazonSocial"] ?>" >
                                     </div>
                                     <label class="col-sm-2 control-label">RFC</label>
                                     <div class="col-sm-4"><input type="text" name="rfc" class="form-control" value="<?php echo $row["RFC"] ?>"></div>
@@ -220,7 +221,7 @@ if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
                                     <h3 style="margin-left:20px;">Datos del usuario</h3>
                                     <label class="col-sm-2 control-label">Usuario</label>
                                     <div class="col-sm-4"><input type="text" name="user" value="<?php echo $row['usuario']; ?>" class="form-control m-b"></div>
-                                    <label class="col-sm-2 control-label">Contraseña</label>
+                                    <label class="col-sm-2 control-label">Contrase&ntilde;a</label>
                                     <div class="col-sm-4"><input type="text" name="pass" value="<?php echo $row['contra'];; ?>" class="form-control m-b"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>

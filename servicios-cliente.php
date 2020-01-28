@@ -75,7 +75,7 @@
                     ?>
                 </ul>
             </li>
-            <li class="nav-submenu"><a href="#">Products</a>
+            <!--<li class="nav-submenu"><a href="#">Products</a>
                 <ul>
                     <li><a href="#">Food</a></li>
                     <li class="nav-submenu"><a href="#">Drinks</a>
@@ -100,13 +100,14 @@
                     <li><a href="#">Candy</a></li>
                     <li><a href="#">Ice Cream</a></li>
                 </ul>
-            </li>
+            </li>-->
             <?php
             if($_COOKIE["lvl"]==1){
             ?>
             <li class="nav-submenu"><a href="#">Mercancias</a>
                 <ul>
-                    <li><a href="mercancias.php">Ver viaje</a></li>
+                    <li><a href="mercancias.php">Ver embarque</a></li>
+                    <li><a href="nuevo-certificado.php">Nuevo embarque</a></li>
                     <li><a href="grafica.php">Reporte</a></li>
                 </ul>
             </li>
@@ -116,7 +117,6 @@
             <li><a href="inc/logout.php">Cerrar sesion</a></li>
         </ul>
     </nav>
-
     <div id="page-wrapper" align="center">
         <div class="wrapper wrapper-content animated fadeInRight">
             <?php

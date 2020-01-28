@@ -7,9 +7,9 @@
 <!DOCTYPE html>
 <html lang="en" class="nav-no-js">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html" ; charset="utf-8" />
+<head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
+    
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <title>CONTAINER ALL RISK</title>
@@ -30,6 +30,16 @@
     <link rel="stylesheet" href="css/defaults.min.css">
     <link rel="stylesheet" href="css/nav-core.min.css">
     <link rel="stylesheet" href="css/nav-layout.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+    <!-- Toastr style -->
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Gritter -->
+    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <script src="js/rem.min.js"></script>
 </head>
 
@@ -105,7 +115,8 @@
             ?>
             <li class="nav-submenu"><a href="#">Mercancias</a>
                 <ul>
-                    <li><a href="mercancias.php">Ver viaje</a></li>
+                    <li><a href="mercancias.php">Ver embarque</a></li>
+                    <li><a href="nuevo-certificado.php">Nuevo embarque</a></li>
                     <li><a href="grafica.php">Reporte</a></li>
                 </ul>
             </li>
@@ -130,6 +141,8 @@
             </div>
         </div>
     </form>
+    <div class="datos_ajax_delete"></div><!-- Datos ajax Final -->
+    <div class="datos_ajax_dato"></div>
     <div id="siniestros" class="container-fluid">
         <table class="table table-bordered dataTables-example">
             <thead>
@@ -236,23 +249,25 @@ if($_COOKIE["lvl"]==1){
     <script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script>
         $('#dataDelete').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget) // Botón que activó el modal
-            var id = button.data('id') // Extraer la información de atributos de datos
+            var button = $(event.relatedTarget) // BotÃ³n que activÃ³ el modal
+            var id = button.data('id') // Extraer la informaciÃ³n de atributos de datos
             var modal = $(this)
             modal.find('#idViaje').val(id)
         })
+
         $("#eliminarDatos").submit(function(event) {
             var parametros = $(this).serialize();
             $.ajax({
                 type: "POST",
-                url: "eliminar-viaje.php",
+                url: "eliminar-mercancia.php",
                 data: parametros,
+
                 beforeSend: function(objeto) {
                     $(".datos_ajax_delete").html("Mensaje: Cargando...");
                 },
                 success: function(datos) {
                     $(".datos_ajax_delete").html(datos);
-                    var url = "viajes.php";
+                    var url = "mercancias.php";
                     setTimeout(function() {
                         $(location).attr('href', url);
                     }, 2000);
@@ -262,6 +277,11 @@ if($_COOKIE["lvl"]==1){
             });
             event.preventDefault();
         });
+
+
+
+
+
         $(document).ready(function() {
             $('.dataTables-example').DataTable({
                 pageLength: 10,
@@ -299,6 +319,7 @@ if($_COOKIE["lvl"]==1){
                 ]
 
             });
+
         });
 
     </script>

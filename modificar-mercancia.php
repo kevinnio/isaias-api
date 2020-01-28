@@ -41,14 +41,14 @@
                 <a href="#"><img src="img/car-w.png" width="85"></a>
             </li>
             <?php
-            if($_COOKIE["lvl"]==2){
-            ?>
+        if($_COOKIE["lvl"]==2){
+        ?>
             <li>
                 <a href="modificar-cliente.php?id=<?php echo $_COOKIE["idUsuario"]; ?>"><i class="fa fa-user"></i> Mis datos</a>
             </li>
             <?php
-                }else{
-            ?>
+        }else{
+        ?>
             <li class="nav-submenu"><a href="#">Clientes</a>
                 <ul>
                     <li><a href="clientes.php">Todos los clientes</a></li>
@@ -56,22 +56,21 @@
                 </ul>
             </li>
             <?php
-            }
-            ?>
+        }
+        ?>
             <li class="nav-submenu"><a href="#">Viajes</a>
                 <ul>
                     <li><a href="viajes.php">Ver viajes</a></li>
                     <li><a href="nuevo-viaje.php">Nuevo viaje</a></li>
                     <li><a href="varios-contenedores.php">Multiples viajes</a></li>
                     <?php
-                    if($_COOKIE["lvl"]==1){
-                    ?>
-
+        if($_COOKIE["lvl"]==1){
+        ?>
                     <li><a href="reportes.php">Reporte general</a></li>
                     <li><a href="reportes-detallado.php">Reporte detallado</a></li>
                     <?php
-                    }
-                    ?>
+        }
+        ?>
                 </ul>
             </li>
             <!--<li class="nav-submenu"><a href="#">Products</a>
@@ -101,11 +100,12 @@
                 </ul>
             </li>-->
             <?php
-            if($_COOKIE["lvl"]==1){
-            ?>
+        if($_COOKIE["lvl"]==1){
+        ?>
             <li class="nav-submenu"><a href="#">Mercancias</a>
                 <ul>
-                    <li><a href="mercancias.php">Ver viaje</a></li>
+                    <li><a href="mercancias.php">Ver embarque</a></li>
+                    <li><a href="nuevo-certificado.php">Nuevo embarque</a></li>
                     <li><a href="grafica.php">Reporte</a></li>
                 </ul>
             </li>
@@ -174,7 +174,7 @@ if (isset($_GET["id"])) {
                                         <div class="col-sm-4"><input type="text" name="cliente" class="form-control m-b" value="<?php echo $rowp["Cliente"]; ?>"></div>
 
                                         <label class="col-sm-2 control-label">RFC</label>
-                                        <div class="col-sm-2"><input type="text" name="rfc" class="form-control m-b" value="<?php echo $rowp["rfc"]; ?>"></div>
+                                        <div class="col-sm-3"><input type="text" name="rfc" class="form-control m-b" value="<?php echo $rowp["rfc"]; ?>"></div>
                                     </div>
 
                                     <div class="form-group">
@@ -185,10 +185,10 @@ if (isset($_GET["id"])) {
                                         <label class="col-sm-2 control-label">Estado de la Mercancia</label>
                                         <div class="col-sm-2"><input type="text" name="mercancia" class="form-control m-b" value="<?php echo $rowp["mercancia"]; ?>"></div>
                                         <label class="col-sm-2 control-label">Importe Asegurado</label>
-                                        <div class="col-sm-2"><input id="valor" type="number" onkeyUp="calcular();" name="importe" class="form-control m-b" value="<?php echo $rowp["importe"]; ?>"></div>
+                                        <div class="col-sm-2"><input id="valor" type="number" onkeyUp="calcular();" name="importe" class="form-control m-b" value="<?php echo $rowp["importe"]; ?>"></div></br></br></br>
 
-                                        <label class="col-sm-3 control-label">Bienes Asegurados</label>
-                                        <div class="col-sm-8"><input type="text" name="TipoOperacion" class="form-control m-b" value="<?php echo $rowp["TipoOperacion"]; ?>">
+                                        <label class="col-sm-2 control-label">Bienes Asegurados</label>
+                                        <div class="col-sm-9"><input type="text" name="TipoOperacion" class="form-control m-b" value="<?php echo $rowp["TipoOperacion"]; ?>">
                                         </div>
 
                                         <label class="col-sm-3 control-label">Descripcion del Embarque</label>
@@ -215,7 +215,7 @@ if (isset($_GET["id"])) {
                                         <h3 style="margin-left:20px;">Origen y Destino</h3>
 
                                         <label class="col-sm-2 control-label">Pais Origen</label>
-                                        <div class="col-sm-1"><input type="text" name="porigen" class="form-control m-b" value="<?php echo $rowp["porigen"]; ?>"></div>
+                                        <div class="col-sm-2"><input type="text" name="porigen" class="form-control m-b" value="<?php echo $rowp["porigen"]; ?>"></div>
 
                                         <label class="col-sm-2 control-label">Estado Origen</label>
                                         <div class="col-sm-2"><input type="text" name="eorigen" class="form-control m-b" value="<?php echo $rowp["eorigen"]; ?>"></div>
@@ -224,7 +224,7 @@ if (isset($_GET["id"])) {
                                         <div class="col-sm-2"><input type="text" name="corigen" class="form-control m-b" value="<?php echo $rowp["corigen"]; ?>"></div>
 
                                         <label class="col-sm-2 control-label">Pais Destino</label>
-                                        <div class="col-sm-1"><input type="text" name="pdestino" class="form-control m-b" value="<?php echo $rowp["pdestino"]; ?>"></div>
+                                        <div class="col-sm-2"><input type="text" name="pdestino" class="form-control m-b" value="<?php echo $rowp["pdestino"]; ?>"></div>
 
                                         <label class="col-sm-2 control-label">Estado Destino</label>
                                         <div class="col-sm-2"><input type="text" name="edestino" class="form-control m-b" value="<?php echo $rowp["edestino"]; ?>"></div>

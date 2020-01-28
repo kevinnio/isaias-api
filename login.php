@@ -34,8 +34,8 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    
     <title>Login | Container All Risk</title>
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -46,7 +46,7 @@
 
         html,
         body {
-            background-image: url('img/casco.gif');
+            background-image: url('img/casco.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             height: 100%;

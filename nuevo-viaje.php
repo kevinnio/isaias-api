@@ -71,7 +71,6 @@
                     <?php
                     if($_COOKIE["lvl"]==1){
                     ?>
-
                     <li><a href="reportes.php">Reporte general</a></li>
                     <li><a href="reportes-detallado.php">Reporte detallado</a></li>
                     <?php
@@ -110,7 +109,8 @@
             ?>
             <li class="nav-submenu"><a href="#">Mercancias</a>
                 <ul>
-                    <li><a href="mercancias.php">Ver viaje</a></li>
+                    <li><a href="mercancias.php">Ver embarque</a></li>
+                    <li><a href="nuevo-certificado.php">Nuevo embarque</a></li>
                     <li><a href="grafica.php">Reporte</a></li>
                 </ul>
             </li>

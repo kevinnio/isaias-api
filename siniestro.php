@@ -7,9 +7,9 @@
 <!DOCTYPE html>
 <html lang="en" class="nav-no-js">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html" ; charset="utf-8" />
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <title>CONTAINER ALL RISK</title>
@@ -105,7 +105,8 @@
             ?>
             <li class="nav-submenu"><a href="#">Mercancias</a>
                 <ul>
-                    <li><a href="mercancias.php">Ver viaje</a></li>
+                    <li><a href="mercancias.php">Ver embarque</a></li>
+                    <li><a href="nuevo-certificado.php">Nuevo embarque</a></li>
                     <li><a href="grafica.php">Reporte</a></li>
                 </ul>
             </li>
@@ -364,7 +365,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Siniestros - Container All Risk</title>

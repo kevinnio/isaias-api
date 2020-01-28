@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>CONTAINER ALL RISK</title>
-    <meta charset="utf-8">
+    
     <link rel="shortcut icon" href="favicon.ico" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -64,7 +64,7 @@
                 }
             }*/
         .jumbotron {
-            background: url('img/indice.jpg') no-repeat center center fixed;
+            background: url('img/transporte.jpg') no-repeat center center fixed;
             padding-top: 14%;
             padding-bottom: 20%;
             -webkit-background-size: cover;
@@ -184,7 +184,7 @@
             border: 0;
             font-size: 12px !important;
             line-height: 1.42857143 !important;
-            letter-spacing: 4px;
+            /*letter-spacing: 4px;*/
             border-radius: 0;
             font-family: Montserrat, sans-serif;
         }
@@ -342,7 +342,7 @@
                     <li><a href="#oferta">OFERTA DE VALORES</a></li>
                     <li><a href="#servicios">SERVICIOS</a></li>
                     <li><a href="#contacto">CONTACTO</a></li>
-                    <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                    <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     <li><a></a></li>
                 </ul>
             </div>

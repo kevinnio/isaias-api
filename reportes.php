@@ -7,9 +7,9 @@
 <!DOCTYPE html>
 <html lang="en" class="nav-no-js">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html" ; charset="utf-8" />
+<head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
+    
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <title>CONTAINER ALL RISK</title>
@@ -66,7 +66,6 @@
                     <?php
                     if($_COOKIE["lvl"]==1){
                     ?>
-
                     <li><a href="reportes.php">Reporte general</a></li>
                     <li><a href="reportes-detallado.php">Reporte detallado</a></li>
                     <?php
@@ -105,7 +104,8 @@
             ?>
             <li class="nav-submenu"><a href="#">Mercancias</a>
                 <ul>
-                    <li><a href="mercancias.php">Ver viaje</a></li>
+                    <li><a href="mercancias.php">Ver embarque</a></li>
+                    <li><a href="nuevo-certificado.php">Nuevo embarque</a></li>
                     <li><a href="grafica.php">Reporte</a></li>
                 </ul>
             </li>
@@ -124,7 +124,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fechaInicio = $_POST["fechaInicio"];
     $fechaFin = $_POST["fechaFin"];
     if($idCliente==0){
-        $result=query("SELECT V.idCliente, C.RazonSocial, V.Pagado, IFNULL((SELECT SUM(CantCont) FROM viajes WHERE idTipoContenedor=1 and idCliente=V.idCliente and FechaAlta>='".$fechaInicio." 00:00:00' and FechaAlta<='".$fechaFin." 23:59:59'),0) AS Seco20, (SELECT Precio FROM Servicios WHERE idTipoContenedor=1 and idCliente=V.idCliente) AS PrecioSeco20, IFNULL((SELECT SUM(CantCont) FROM viajes WHERE idTipoContenedor=4 and idCliente=V.idCliente and FechaAlta>='".$fechaInicio." 00:00:00' and FechaAlta<='".$fechaFin." 23:59:59'),0) AS Isotanque, (SELECT Precio FROM Servicios WHERE idTipoContenedor=4 and idCliente=V.idCliente) AS PrecioIsotanque, IFNULL((SELECT SUM(CantCont) FROM viajes WHERE idTipoContenedor=3 and idCliente=V.idCliente and FechaAlta>='".$fechaInicio." 00:00:00' and FechaAlta<='".$fechaFin." 23:59:59'),0) AS Seco40, (SELECT Precio FROM Servicios WHERE idTipoContenedor=3 and idCliente=V.idCliente) AS PrecioSeco40, IFNULL((SELECT SUM(CantCont) FROM viajes WHERE idTipoContenedor=2 and idCliente=V.idCliente and FechaAlta>='".$fechaInicio." 00:00:00' and FechaAlta<='".$fechaFin." 23:59:59'),0) AS Refrigerado, (SELECT Precio FROM Servicios WHERE idTipoContenedor=2 and idCliente=V.idCliente) AS PrecioRefrigerado FROM viajes V INNER JOIN clientes C ON V.idCliente=C.idCliente WHERE V.FechaAlta>='".$fechaInicio." 00:00:00' and V.FechaAlta<='".$fechaFin." 23:59:59' GROUP BY V.idCliente ORDER BY V.idCliente");
+        $result=query("SELECT  V.idCliente, 
+    C.RazonSocial, 
+    V.Pagado, 
+
+    SUM(CASE WHEN V.idTipoContenedor = 1 THEN V.CantCont ELSE 0 END) AS Seco20,
+    SUM(CASE WHEN V.idTipoContenedor = 4 THEN V.CantCont ELSE 0 END) AS Isotanque,
+    SUM(CASE WHEN V.idTipoContenedor = 3 THEN V.CantCont ELSE 0 END) AS Seco40,
+    SUM(CASE WHEN V.idTipoContenedor = 2 THEN V.CantCont ELSE 0 END) AS Refrigerado,
+
+    MAX(CASE WHEN S.idTipoContenedor = 1 THEN S.Precio ELSE NULL END) AS PrecioSeco20,
+    MAX(CASE WHEN S.idTipoContenedor = 4 THEN S.Precio ELSE NULL END) AS PrecioIsotanque,
+    MAX(CASE WHEN S.idTipoContenedor = 3 THEN S.Precio ELSE NULL END) AS PrecioSeco40,
+    MAX(CASE WHEN S.idTipoContenedor = 2 THEN S.Precio ELSE NULL END) AS PrecioRefrigerado
+
+    FROM viajes V 
+    INNER JOIN clientes C 
+        ON V.idCliente=C.idCliente 
+
+    LEFT JOIN Servicios S
+        ON S.idCliente = V.idCliente
+        AND S.idTipoContenedor = V.idTipoContenedor
+
+    WHERE   V.FechaAlta>='".$fechaInicio." 00:00:00' 
+        and V.FechaAlta<='".$fechaFin." 23:59:59' 
+        and V.idTipoContenedor in (1,2,3,4)
+
+    GROUP BY V.idCliente,
+        C.RazonSocial, 
+        V.Pagado
+
+    ORDER BY V.idCliente");
+        /*SELECT V.idCliente, C.RazonSocial, V.Pagado, IFNULL((SELECT SUM(CantCont) FROM viajes WHERE idTipoContenedor=1 and idCliente=V.idCliente and FechaAlta>='".$fechaInicio." 00:00:00' and FechaAlta<='".$fechaFin." 23:59:59'),0) AS Seco20, (SELECT Precio FROM Servicios WHERE idTipoContenedor=1 and idCliente=V.idCliente) AS PrecioSeco20, IFNULL((SELECT SUM(CantCont) FROM viajes WHERE idTipoContenedor=4 and idCliente=V.idCliente and FechaAlta>='".$fechaInicio." 00:00:00' and FechaAlta<='".$fechaFin." 23:59:59'),0) AS Isotanque, (SELECT Precio FROM Servicios WHERE idTipoContenedor=4 and idCliente=V.idCliente) AS PrecioIsotanque, IFNULL((SELECT SUM(CantCont) FROM viajes WHERE idTipoContenedor=3 and idCliente=V.idCliente and FechaAlta>='".$fechaInicio." 00:00:00' and FechaAlta<='".$fechaFin." 23:59:59'),0) AS Seco40, (SELECT Precio FROM Servicios WHERE idTipoContenedor=3 and idCliente=V.idCliente) AS PrecioSeco40, IFNULL((SELECT SUM(CantCont) FROM viajes WHERE idTipoContenedor=2 and idCliente=V.idCliente and FechaAlta>='".$fechaInicio." 00:00:00' and FechaAlta<='".$fechaFin." 23:59:59'),0) AS Refrigerado, (SELECT Precio FROM Servicios WHERE idTipoContenedor=2 and idCliente=V.idCliente) AS PrecioRefrigerado FROM viajes V INNER JOIN clientes C ON V.idCliente=C.idCliente WHERE V.FechaAlta>='".$fechaInicio." 00:00:00' and V.FechaAlta<='".$fechaFin." 23:59:59' GROUP BY V.idCliente ORDER BY V.idCliente*/
     }else{
         $result=query("SELECT V.idCliente, C.RazonSocial, IFNULL((SELECT SUM(CantCont) FROM viajes WHERE idTipoContenedor=1 and idCliente=V.idCliente and FechaAlta>='".$fechaInicio." 00:00:00' and FechaAlta<='".$fechaFin." 23:59:59'),0) AS Seco20, (SELECT Precio FROM Servicios WHERE idTipoContenedor=1 and idCliente=V.idCliente) AS PrecioSeco20, IFNULL((SELECT SUM(CantCont) FROM viajes WHERE idTipoContenedor=4 and idCliente=V.idCliente and FechaAlta>='".$fechaInicio." 00:00:00' and FechaAlta<='".$fechaFin." 23:59:59'),0) AS Isotanque, (SELECT Precio FROM Servicios WHERE idTipoContenedor=4 and idCliente=V.idCliente) AS PrecioIsotanque, IFNULL((SELECT SUM(CantCont) FROM viajes WHERE idTipoContenedor=3 and idCliente=V.idCliente and FechaAlta>='".$fechaInicio." 00:00:00' and FechaAlta<='".$fechaFin." 23:59:59'),0) AS Seco40, (SELECT Precio FROM Servicios WHERE idTipoContenedor=3 and idCliente=V.idCliente) AS PrecioSeco40, IFNULL((SELECT SUM(CantCont) FROM viajes WHERE idTipoContenedor=2 and idCliente=V.idCliente and FechaAlta>='".$fechaInicio." 00:00:00' and FechaAlta<='".$fechaFin." 23:59:59'),0) AS Refrigerado, (SELECT Precio FROM Servicios WHERE idTipoContenedor=2 and idCliente=V.idCliente) AS PrecioRefrigerado FROM viajes V INNER JOIN clientes C ON V.idCliente=C.idCliente WHERE V.FechaAlta>='".$fechaInicio." 00:00:00' and V.FechaAlta<='".$fechaFin." 23:59:59' and V.idCliente=" . $idCliente . " GROUP BY V.idCliente ORDER BY V.idCliente");
     }
