@@ -30,3 +30,12 @@ function generateNewApiToken($userID) {
 
   return md5(uniqid("$userID:$date", true));
 }
+
+/**
+ * Gets API token from current request headers
+ */
+function getApiTokenFromRequest() {
+  $header = getallheaders()['Authorization'];
+
+  return str_replace('Bearer ', '', $header);
+}
