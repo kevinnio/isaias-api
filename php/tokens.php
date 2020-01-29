@@ -36,8 +36,32 @@ function generateNewApiToken($userID) {
  * Gets API token from current request headers
  */
 function getApiTokenFromRequest() {
-  $header = getallheaders()['Authorization'];
+  $headers = getallheaders();
+  $header = isset($headers['Authorization']) ? $headers['Authorization'] : null;
+
+  if (empty($header)) {
+    unauthorized();
+    exit();
+  }
 
   return str_replace('Bearer ', '', $header);
 }
 
+function isAdminAuthenticated() {
+  return getUserFromRequestToken()['lvl'] > 0;
+}
+
+function getUserFromRequestToken() {
+  $token = getApiTokenFromRequest();
+  $results = query("SELECT user_id FROM api_tokens WHERE token = '$token'");
+  $row = mysqli_fetch_assoc($results);
+
+  if (empty($row)) {
+    return null;
+  } else {
+    $results = query('SELECT * FROM clientes WHERE idCliente = ' . $row['user_id']);
+    $row = mysqli_fetch_assoc($results);
+
+    return empty($row) ? null : $row;
+  }
+}

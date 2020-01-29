@@ -16,3 +16,10 @@ function getJSONParams() {
     die("Error while decoding JSON. Error code: $error");
   }
 }
+
+function getParam($param_name, $default_value = null) {
+  $value = isset($_GET[$param_name]) ? $_GET[$param_name] : $default_value;
+  if (empty($value)) isset($_POST[$param_name]) ? $_POST[$param_name] : $default_value;
+
+  return $value;
+}

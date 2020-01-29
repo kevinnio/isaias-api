@@ -11,3 +11,7 @@ function respond($status_code, $data) {
   header('Content-Type: application/json');
   echo json_encode($data);
 }
+
+function unauthorized() {
+  respond(401, ['success' => false, 'error' => 'Unauthorized']);
+}
