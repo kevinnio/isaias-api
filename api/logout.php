@@ -1,13 +1,10 @@
 <?php
 
-require_once __DIR__ . '/../conexion.php';
-require_once __DIR__ . '/../php/server.php';
-require_once __DIR__ . '/../php/params.php';
-require_once __DIR__ . '/../php/tokens.php';
+require_once __DIR__ . '/../php/include.php';
 
 function logoutUser($token) {
   $query = "DELETE FROM api_tokens WHERE token='$token'";
-  $connection = conexion();
+  $connection = getMyConection();
   $result = mysqli_query($connection, $query);
 
   if ($error = mysqli_error($connection)) {

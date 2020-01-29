@@ -1,14 +1,11 @@
 <?php
 
-require_once __DIR__ . '/../conexion.php';
-require_once __DIR__ . '/../php/server.php';
-require_once __DIR__ . '/../php/params.php';
-require_once __DIR__ . '/../php/tokens.php';
+require_once __DIR__ . '/../php/include.php';
 
 function loginUser($user, $password) {
   $query = "SELECT * FROM clientes WHERE usuario='$user' AND " .
          "(pass = md5('$password') OR contra = '$password') AND lvl > 0";
-  $result = mysqli_query(conexion(), $query);
+  $result = mysqli_query(getMyConection(), $query);
   $row = mysqli_fetch_array($result);
 
   if (empty($row)) {

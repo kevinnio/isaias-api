@@ -10,7 +10,7 @@ date_default_timezone_set("America/Mexico_City");
 if (!isset($link)) {$link = false;}
 
 // getMyConection()
-function getMyConection($conexion) {
+function getMyConection($conexion = 0) {
 	global $link;
 	
 	$db_host = "localhost";
