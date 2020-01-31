@@ -1,0 +1,33 @@
+<?php
+
+const REQUIRED_PARAMS = [
+  'cdestino',
+  'Cliente',
+  'Coberturas1',
+  'Coberturas2',
+  'Coberturas3',
+  'Coberturas4',
+  'corigen',
+  'cuota',
+  'detalles',
+  'edestino',
+  'eorigen',
+  'FechaAlta',
+  'FechaLlegada',
+  'FechaSalida',
+  'folio',
+  'gastosexp',
+  'idCliente',
+  'importe',
+  'iva',
+  'mercancia',
+  'moneda',
+  'pdestino',
+  'porigen',
+  'poliza',
+  'prima',
+  'rfc',
+  'TipoOperacion',
+  'TipoTransporte',
+  'total'
+];
