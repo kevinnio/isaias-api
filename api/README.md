@@ -453,3 +453,23 @@ Ejemplo de respuesta fallida:
   "error": "Mensaje de error"
 }
 ```
+
+## GET /api/mercancias/show.pdf.php
+
+Este endpoint permite descargar el PDF de una mercancía especificando su ID.
+Este endpoint no responde con JSON, así que lo mejor es dirigir al usuario
+a la url del PDF o descargarlo directamente.
+
+### Detalles del endpoint
+
+* **Método HTTP**: GET
+* Parámetros (en la URL):
+  * **id**: ID de la mercancía cuyo PDF se quiere obtener
+* Headers esperados:
+  * **Authorization: Bearer _token_** donde _token_ es el generado por /api/login.php
+
+### Ejemplos
+
+```js
+window.location('/api/mercancias/show.pdf.php?id=' + idMercancia)
+```
