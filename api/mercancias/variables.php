@@ -2,7 +2,6 @@
 
 const REQUIRED_PARAMS = [
   'cdestino',
-  'Cliente',
   'Coberturas1',
   'Coberturas2',
   'Coberturas3',
@@ -17,7 +16,6 @@ const REQUIRED_PARAMS = [
   'FechaSalida',
   'folio',
   'gastosexp',
-  'idCliente',
   'importe',
   'iva',
   'mercancia',

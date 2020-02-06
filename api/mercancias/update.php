@@ -17,7 +17,7 @@ function getMercanciaParams() {
 }
 
 // Processing request here
-if (!isAdminAuthenticated()) {
+if (!isAuthenticated()) {
   unauthorized();
   exit();
 }
@@ -35,7 +35,15 @@ $values = join(
 $connection = getMyConection();
 mysqli_begin_transaction($connection, MYSQLI_TRANS_START_READ_WRITE);
 
-mysqli_query($connection, "UPDATE merca SET $values WHERE idViaje = $id");
+$userId = getUserIdFromRequestToken();
+$query = "SELECT idViaje FROM merca WHERE idCliente = $userId AND idViaje = $id";
+$row = mysqli_fetch_assoc(query($query));
+if (empty($row)) {
+  respond(404, ['success' => false, 'error' => "Record with id $id not found"]);
+  exit();
+}
+
+mysqli_query($connection, "UPDATE merca SET $values WHERE idCliente = $userId AND idViaje = $id");
 
 if ($error = mysqli_error($connection)) {
   respond(500, ['success' => false, 'error' => $error]);

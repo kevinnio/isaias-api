@@ -12,8 +12,8 @@ function createApiToken($userID) {
   $connection = getMyConection();
   mysqli_query($connection, "INSERT INTO api_tokens (user_id, token) VALUES ($userID, '$token')");
 
-  if (mysqli_error($connection)) {
-    respond(500, ['success' => false, error => 'Error while generating new token']);
+  if ($error = mysqli_error($connection)) {
+    respond(500, ['success' => false, 'error' => "Error while generating new token: $error"]);
     exit();
   }
 
@@ -47,14 +47,19 @@ function getApiTokenFromRequest() {
   return str_replace('Bearer ', '', $header);
 }
 
-function isAdminAuthenticated() {
-  return getUserFromRequestToken()['lvl'] > 0;
+function isAuthenticated() {
+  return getUserFromRequestToken()['lvl'] == 10;
+}
+
+function getUserIdFromRequestToken() {
+  return getUserFromRequestToken()['idCliente'];
 }
 
 function getUserFromRequestToken() {
   $token = getApiTokenFromRequest();
   $results = query("SELECT user_id FROM api_tokens WHERE token = '$token'");
   $row = mysqli_fetch_assoc($results);
+
 
   if (empty($row)) {
     return null;

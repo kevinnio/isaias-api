@@ -4,9 +4,15 @@ require_once __DIR__ . '/variables.php';
 require_once __DIR__ . '/../../php/include.php';
 
 function getMercanciaParams() {
+  $user = getUserFromRequestToken();
+  $userId = getUserIdFromRequestToken();
+
   $originals = getJSONParams();
-  $params = [];
   $missing = [];
+  $params = [
+    'idCliente' => $userId,
+    'Cliente'   => $user['RazonSocial']
+  ];
 
   foreach (REQUIRED_PARAMS as $key) {
     if (array_key_exists($key, $originals)) {
@@ -26,7 +32,7 @@ function getMercanciaParams() {
 }
 
 // Processing request here
-if (!isAdminAuthenticated()) {
+if (!isAuthenticated()) {
   unauthorized();
   exit();
 }

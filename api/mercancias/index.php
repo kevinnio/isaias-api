@@ -3,14 +3,17 @@
 require_once __DIR__ . '/../../php/include.php';
 
 function loadMercancias($page, $per_page) {
-  $offset = $page * $per_page;
-  $results = query("SELECT * FROM merca ORDER BY folio DESC LIMIT $per_page OFFSET $offset");
+  $id = getUserIdFromRequestToken();
+  $offset = ($page - 1) * $per_page;
+  $query = "SELECT * FROM merca WHERE idCliente = $id ORDER BY folio DESC " .
+           "LIMIT $per_page OFFSET $offset";
+  $results = query($query);
 
   return mysqli_fetch_all($results, MYSQLI_ASSOC);
 }
 
 // Processing request here
-if (!isAdminAuthenticated()) {
+if (!isAuthenticated()) {
   unauthorized();
   exit();
 }
