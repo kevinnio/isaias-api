@@ -93,72 +93,11 @@ Ejemplo de respuesta fallida:
 }
 ```
 
-## GET /api/clientes/autocomplete.php
-
-Este endpoint permite implementar funcionalidad de autocompletado en el frontend de
-las aplicaciones que usen esta API. Recibe todo o parte de un nombre de cliente y
-responde con sugerencias de autocompletado. Este endpoint devuelve un máximo de 10
-sugerencias por request.
-
-### Detalles del endpoint
-
-* **Método HTTP**: GET
-* Parámetros:
-  * **name**: Todo o parte del nombre de un cliente registrado
-* Headers esperados:
-  * **Authorization: Bearer _token_** donde _token_ es el generado por /api/login.php
-
-### Ejemplos
-
-Ejemplo de request con jQuery:
-```js
-$.ajax({
-  url: '/api/clientes/autocomplete.php',
-  method: 'get',
-  data: { name: "cliente" },
-  success: function(response) {
-    console.log(response.clientes);
-  },
-  error: function(xhr) {
-    alert(xhr.responseJSON.error);
-  }
-});
-```
-
-Ejemplo de respuesta exitosa:
-```json
-{
-  "success": true,
-  "clientes": [
-    {
-      "idCliente": 1,
-      "RazonSocial": "Cliente frecuente"
-    },
-    {
-      "idCliente": 2,
-      "RazonSocial": "Cliente pagador"
-    },
-    {
-      "idCliente": 3,
-      "RazonSocial": "Cliente avispado"
-    }
-  ]
-}
-```
-
-Ejemplo de respuesta fallida:
-```json
-{
-  "success": false,
-  "error": "Mensaje de error"
-}
-```
-
 ## GET /api/mercancias/index.php
 
 Este endpoint permite listar los registros de mercancías actualmente en la base de datos.
-Las mercancías se devuelven en páginas, junto con número de página y cantidad de elementos
-por página.
+Solo las mercancías asociadas al usuario que usa la API son mostradas. Las mercancías se
+devuelven en páginas, junto con número de página y cantidad de elementos por página.
 
 ### Detalles del endpoint
 
@@ -235,7 +174,8 @@ Este endpoint permite crear un nuevo registro de mercancía. Los atributos de la
 mercancía deben ser enviados en el cuerpo de la request en formato JSON. Los campos
 requeridos son los mismos que se usan cuando se crea una mercancía desde el admin del
 sitio. Todos los parámetros listados abajo son obligatorios, pero pueden enviarse en blanco
-si es necesario.
+si es necesario. La nueva mercancía se asocia automáticamente al usuario que esta usando
+la API.
 
 ### Detalles del endpoint
 
@@ -243,7 +183,6 @@ si es necesario.
 * Parámetros (en la URL): Ninguno
 * Parámetros (en el body, requeridos):
   * **cdestino**
-  * **Cliente**
   * **Coberturas1**
   * **Coberturas2**
   * **Coberturas3**
@@ -258,7 +197,6 @@ si es necesario.
   * **FechaSalida**
   * **folio**
   * **gastosexp**
-  * **idCliente**
   * **importe**
   * **iva**
   * **mercancia**
@@ -319,7 +257,8 @@ Este endpoint permite modificar un registro de mercancía. Los atributos de la
 mercancía deben ser enviados en el cuerpo de la request en formato JSON. Los campos
 permitidos son los mismos que se usan cuando se crea una mercancía desde el admin del
 sitio. Todos los parámetros listados abajo son opcionales. Solo se modificará un parámetro
-si es incluído en la request.
+si es incluído en la request. El usuario que usa la API solo puede modificar mercancias
+asociadas a sí mismo.
 
 ### Detalles del endpoint
 
@@ -328,7 +267,6 @@ si es incluído en la request.
   * **id**: ID de la mercancia a modificar
 * Parámetros (en el body, opcionales):
   * **cdestino**
-  * **Cliente**
   * **Coberturas1**
   * **Coberturas2**
   * **Coberturas3**
@@ -343,7 +281,6 @@ si es incluído en la request.
   * **FechaSalida**
   * **folio**
   * **gastosexp**
-  * **idCliente**
   * **importe**
   * **iva**
   * **mercancia**
@@ -406,7 +343,8 @@ Ejemplo de respuesta fallida:
 ## DELETE /api/mercancias/delete.php
 
 Este endpoint permite eliminar un registro de mercancía especificando su ID. Ninguno de los
-registros relacionados a la mercancía es eliminado.
+registros relacionados a la mercancía es eliminado. El usuario que usa la API solo puede
+eliminar mercancías asociadas a sí mismo.
 
 ### Detalles del endpoint
 
@@ -452,24 +390,4 @@ Ejemplo de respuesta fallida:
   "success": false,
   "error": "Mensaje de error"
 }
-```
-
-## GET /api/mercancias/show.pdf.php
-
-Este endpoint permite descargar el PDF de una mercancía especificando su ID.
-Este endpoint no responde con JSON, así que lo mejor es dirigir al usuario
-a la url del PDF o descargarlo directamente.
-
-### Detalles del endpoint
-
-* **Método HTTP**: GET
-* Parámetros (en la URL):
-  * **id**: ID de la mercancía cuyo PDF se quiere obtener
-* Headers esperados:
-  * **Authorization: Bearer _token_** donde _token_ es el generado por /api/login.php
-
-### Ejemplos
-
-```js
-window.location('/api/mercancias/show.pdf.php?id=' + idMercancia)
 ```
