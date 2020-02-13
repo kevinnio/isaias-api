@@ -36,8 +36,7 @@ function generateNewApiToken($userID) {
  * Gets API token from current request headers
  */
 function getApiTokenFromRequest() {
-  $headers = getallheaders();
-  $header = isset($headers['Authorization']) ? $headers['Authorization'] : null;
+  $header = $_SERVER['HTTP_AUTHORIZATION'];
 
   if (empty($header)) {
     unauthorized();
